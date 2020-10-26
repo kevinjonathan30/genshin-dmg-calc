@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Genshin Impact Damage Calculator</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-  </head>
-  <body>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Genshin Impact Damage Calculator</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+</head>
+
+<body>
   <section class="section">
     <div class="container">
       <h1 class="title">
@@ -16,7 +18,6 @@
         Version 1.0
       </p>
       <hr>
-      <form onsubmit="calculate();">
       <table class="table is-fullwidth is-striped">
         <thead>
           <tr>
@@ -28,60 +29,79 @@
         <tbody>
           <tr>
             <td>Base Attack</td>
-            <td><input class="input" id="baseAttack1" type="number" placeholder="Base Attack" value="544" min="0" required></td>
-            <td><input class="input" id="baseAttack2" type="number" placeholder="Base Attack" value="544" min="0" required></td>
+            <td><input class="input" id="baseAttack1" type="number" placeholder="Base Attack" value="544" min="0"
+                required></td>
+            <td><input class="input" id="baseAttack2" type="number" placeholder="Base Attack" value="544" min="0"
+                required></td>
           </tr>
           <tr>
             <td>Attack %</td>
-            <td><input class="input" id="attack1" type="number" placeholder="Attack %" value="98" min="0" step="any" required></td>
-            <td><input class="input" id="attack2" type="number" placeholder="Attack %" value="98" min="0" step="any" required></td>
+            <td><input class="input" id="attack1" type="number" placeholder="Attack %" value="98" min="0" step="any"
+                required></td>
+            <td><input class="input" id="attack2" type="number" placeholder="Attack %" value="98" min="0" step="any"
+                required></td>
           </tr>
           <tr>
             <td>Attack Flat</td>
-            <td><input class="input" id="attackFlat1" type="number" placeholder="Attack Flat" value="40" min="0" required></td>
-            <td><input class="input" id="attackFlat2" type="number" placeholder="Attack Flat" value="40" min="0" required></td>
+            <td><input class="input" id="attackFlat1" type="number" placeholder="Attack Flat" value="40" min="0"
+                required></td>
+            <td><input class="input" id="attackFlat2" type="number" placeholder="Attack Flat" value="40" min="0"
+                required></td>
           </tr>
           <tr>
             <td>Critical Rate %</td>
-            <td><input class="input" id="criticalRate1" type="number" placeholder="Critical Rate %" value="16.2" min="0" step="any" required></td>
-            <td><input class="input" id="criticalRate2" type="number" placeholder="Critical Rate %" value="38.2" min="0" step="any" required></td>
+            <td><input class="input" id="criticalRate1" type="number" placeholder="Critical Rate %" value="16.2" min="0"
+                step="any" required></td>
+            <td><input class="input" id="criticalRate2" type="number" placeholder="Critical Rate %" value="38.2" min="0"
+                step="any" required></td>
           </tr>
           <tr>
             <td>Critical DMG %</td>
-            <td><input class="input" id="criticalDmg1" type="number" placeholder="Critical DMG %" value="71.1" min="0" step="any" required></td>
-            <td><input class="input" id="criticalDmg2" type="number" placeholder="Critical DMG %" value="71.1" min="0" step="any" required></td>
+            <td><input class="input" id="criticalDmg1" type="number" placeholder="Critical DMG %" value="71.1" min="0"
+                step="any" required></td>
+            <td><input class="input" id="criticalDmg2" type="number" placeholder="Critical DMG %" value="71.1" min="0"
+                step="any" required></td>
           </tr>
           <tr>
             <td>Physical DMG %</td>
-            <td><input class="input" id="physicalDmg1" type="number" placeholder="Physical DMG %" value="60.4" min="0" step="any" required></td>
-            <td><input class="input" id="physicalDmg2" type="number" placeholder="Physical DMG %" value="25.4" min="0" step="any" required></td>
+            <td><input class="input" id="physicalDmg1" type="number" placeholder="Physical DMG %" value="60.4" min="0"
+                step="any" required></td>
+            <td><input class="input" id="physicalDmg2" type="number" placeholder="Physical DMG %" value="25.4" min="0"
+                step="any" required></td>
           </tr>
           <tr>
             <td>Elemental DMG %</td>
-            <td><input class="input" id="elementalDmg1" type="number" placeholder="Elemental DMG %" value="15" min="0" step="any" required></td>
-            <td><input class="input" id="elementalDmg2" type="number" placeholder="Elemental DMG %" value="15" min="0" step="any" required></td>
+            <td><input class="input" id="elementalDmg1" type="number" placeholder="Elemental DMG %" value="15" min="0"
+                step="any" required></td>
+            <td><input class="input" id="elementalDmg2" type="number" placeholder="Elemental DMG %" value="15" min="0"
+                step="any" required></td>
           </tr>
           <tr>
             <td>Elemental Defense Reduction %</td>
-            <td><input class="input" id="elementalDefReduction1" type="number" placeholder="Elemental Defense Reduction %" value="5" min="0" step="any" required></td>
-            <td><input class="input" id="elementalDefReduction2" type="number" placeholder="Elemental Defense Reduction %" value="5" min="0" step="any" required></td>
+            <td><input class="input" id="elementalDefReduction1" type="number"
+                placeholder="Elemental Defense Reduction %" value="5" min="0" step="any" required></td>
+            <td><input class="input" id="elementalDefReduction2" type="number"
+                placeholder="Elemental Defense Reduction %" value="5" min="0" step="any" required></td>
           </tr>
           <tr>
             <td>Elemental Mastery Bonus %</td>
-            <td><input class="input" id="elementalMasteryBonus1" type="number" placeholder="Elemental Mastery Bonus %" value="19.8" min="0" step="any" required></td>
-            <td><input class="input" id="elementalMasteryBonus2" type="number" placeholder="Elemental Mastery Bonus %" value="19.8" min="0" step="any" required></td>
+            <td><input class="input" id="elementalMasteryBonus1" type="number" placeholder="Elemental Mastery Bonus %"
+                value="19.8" min="0" step="any" required></td>
+            <td><input class="input" id="elementalMasteryBonus2" type="number" placeholder="Elemental Mastery Bonus %"
+                value="19.8" min="0" step="any" required></td>
           </tr>
           <tr>
             <td>Physical Defense Reduction %</td>
-            <td><input class="input" id="physicalDefReduction1" type="number" placeholder="Physical Defense Reduction %" value="5" min="0" step="any" required></td>
-            <td><input class="input" id="physicalDefReduction2" type="number" placeholder="Physical Defense Reduction %" value="5" min="0" step="any" required></td>
+            <td><input class="input" id="physicalDefReduction1" type="number" placeholder="Physical Defense Reduction %"
+                value="5" min="0" step="any" required></td>
+            <td><input class="input" id="physicalDefReduction2" type="number" placeholder="Physical Defense Reduction %"
+                value="5" min="0" step="any" required></td>
           </tr>
         </tbody>
       </table>
-      <button class="button is-link" type="submit">Calculate!</button>
-    </form>
-    <hr>
-    <table class="table is-fullwidth is-bordered is-hoverable">
+      <button class="button is-link" onclick="calculate();">Calculate!</button>
+      <hr>
+      <table class="table is-fullwidth is-bordered is-hoverable">
         <thead>
           <tr>
             <th>Attributes</th>
@@ -94,7 +114,7 @@
           <tr>
             <td>Normal Attack Total DMG</td>
             <td id="normalAttackTotalDmg1">2408.98</td>
-            <td id="normalAttackTotalDmg2">2438.4</td>
+            <td id="normalAttackTotalDmg2">2438.40</td>
             <td id="normalAttackTotalDmg3">101.22</td>
           </tr>
           <tr>
@@ -115,8 +135,65 @@
   </section>
   <script>
     function calculate() {
-      alert("Success");
+      //baseAttack
+      var baseAttack1 = Number(document.getElementById("baseAttack1").value);
+      var baseAttack2 = Number(document.getElementById("baseAttack2").value);
+      //Attack %
+      var attack1 = Number(document.getElementById("attack1").value);
+      var attack2 = Number(document.getElementById("attack2").value);
+      //Attack Flat
+      var attackFlat1 = Number(document.getElementById("attackFlat1").value);
+      var attackFlat2 = Number(document.getElementById("attackFlat2").value);
+      //Critical Rate %
+      var criticalRate1 = Number(document.getElementById("criticalRate1").value);
+      var criticalRate2 = Number(document.getElementById("criticalRate2").value);
+      //Critical DMG %
+      var criticalDmg1 = Number(document.getElementById("criticalDmg1").value);
+      var criticalDmg2 = Number(document.getElementById("criticalDmg2").value);
+      //Physical DMG %
+      var physicalDmg1 = Number(document.getElementById("physicalDmg1").value);
+      var physicalDmg2 = Number(document.getElementById("physicalDmg2").value);
+      //Elemental DMG %
+      var elementalDmg1 = Number(document.getElementById("elementalDmg1").value);
+      var elementalDmg2 = Number(document.getElementById("elementalDmg2").value);
+      //Elemental Defense Reduction %
+      var elementalDefReduction1 = Number(document.getElementById("elementalDefReduction1").value);
+      var elementalDefReduction2 = Number(document.getElementById("elementalDefReduction2").value);
+      //Elemental Mastery Bonus %
+      var elementalMasteryBonus1 = Number(document.getElementById("elementalMasteryBonus1").value);
+      var elementalMasteryBonus2 = Number(document.getElementById("elementalMasteryBonus2").value);
+      //Physical Defense Reduction %
+      var physicalDefReduction1 = Number(document.getElementById("physicalDefReduction1").value);
+      var physicalDefReduction2 = Number(document.getElementById("physicalDefReduction2").value);
+
+      var normalAttackTotalDmg1 = ((((baseAttack1 * (1 + attack1 / 100)) + attackFlat1) * (1 + (criticalRate1 / 100 * (1 + criticalDmg1 / 100))) * (1 + physicalDmg1 / 100)) / (1 - physicalDefReduction1 / 100));
+      document.getElementById("normalAttackTotalDmg1").innerHTML = normalAttackTotalDmg1.toFixed(2);
+
+      var normalAttackTotalDmg2 = ((((baseAttack2 * (1 + attack2 / 100)) + attackFlat2) * (1 + (criticalRate2 / 100 * (1 + criticalDmg2 / 100))) * (1 + physicalDmg2 / 100)) / (1 - physicalDefReduction2 / 100));
+      document.getElementById("normalAttackTotalDmg2").innerHTML = normalAttackTotalDmg2.toFixed(2);
+
+      var normalAttackTotalDmg3 = normalAttackTotalDmg2 / normalAttackTotalDmg1 * 100;
+      document.getElementById("normalAttackTotalDmg3").innerHTML = normalAttackTotalDmg3.toFixed(2);
+
+      var elementalAttackTotalDmg1 = (((baseAttack1 * (1 + attack1 / 100)) + attackFlat1) * (1 + (criticalRate1 / 100 * (1 + criticalDmg1 / 100))) * (1 + elementalDmg1 / 100)) / (1 - elementalDefReduction1 / 100);
+      document.getElementById("elementalAttackTotalDmg1").innerHTML = elementalAttackTotalDmg1.toFixed(2);
+
+      var elementalAttackTotalDmg2 = (((baseAttack2 * (1 + attack2 / 100)) + attackFlat2) * (1 + (criticalRate2 / 100 * (1 + criticalDmg2 / 100))) * (1 + elementalDmg2 / 100)) / (1 - elementalDefReduction2 / 100);
+      document.getElementById("elementalAttackTotalDmg2").innerHTML = elementalAttackTotalDmg2.toFixed(2);
+
+      var elementalAttackTotalDmg3 = elementalAttackTotalDmg2 / elementalAttackTotalDmg1 * 100;
+      document.getElementById("elementalAttackTotalDmg3").innerHTML = elementalAttackTotalDmg3.toFixed(2);
+
+      var elementalComboTotalDmg1 = (((baseAttack1 * (1 + attack1 / 100)) + attackFlat1) * (1 + (criticalRate1 / 100 * (1 + criticalDmg1 / 100))) * (1 + elementalDmg1 / 100) * (1 + elementalMasteryBonus1 / 100)) / (1 - elementalDefReduction1 / 100);
+      document.getElementById("elementalComboTotalDmg1").innerHTML = elementalComboTotalDmg1.toFixed(2);
+
+      var elementalComboTotalDmg2 = (((baseAttack2 * (1 + attack2 / 100)) + attackFlat2) * (1 + (criticalRate2 / 100 * (1 + criticalDmg2 / 100))) * (1 + elementalDmg2 / 100) * (1 + elementalMasteryBonus2 / 100)) / (1 - elementalDefReduction2 / 100);
+      document.getElementById("elementalComboTotalDmg2").innerHTML = elementalComboTotalDmg2.toFixed(2);
+
+      var elementalComboTotalDmg3 = elementalComboTotalDmg2 / elementalComboTotalDmg1 * 100;
+      document.getElementById("elementalComboTotalDmg3").innerHTML = elementalComboTotalDmg3.toFixed(2);
     }
   </script>
-  </body>
+</body>
+
 </html>
