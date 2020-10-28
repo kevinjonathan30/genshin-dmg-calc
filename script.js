@@ -1,59 +1,104 @@
+const getValue = id => Number(document.getElementById(id).value); 
+const showValue = (id, value) => document.getElementById(id).innerHTML = value.toFixed(2);
+
 function calculate() {
-      //baseAttack
-      var baseAttack1 = Number(document.getElementById("baseAttack1").value);
-      var baseAttack2 = Number(document.getElementById("baseAttack2").value);
-      //Attack %
-      var attack1 = Number(document.getElementById("attack1").value);
-      var attack2 = Number(document.getElementById("attack2").value);
-      //Attack Flat
-      var attackFlat1 = Number(document.getElementById("attackFlat1").value);
-      var attackFlat2 = Number(document.getElementById("attackFlat2").value);
-      //Critical Rate %
-      var criticalRate1 = Number(document.getElementById("criticalRate1").value);
-      var criticalRate2 = Number(document.getElementById("criticalRate2").value);
-      //Critical DMG %
-      var criticalDmg1 = Number(document.getElementById("criticalDmg1").value);
-      var criticalDmg2 = Number(document.getElementById("criticalDmg2").value);
-      //Physical DMG %
-      var physicalDmg1 = Number(document.getElementById("physicalDmg1").value);
-      var physicalDmg2 = Number(document.getElementById("physicalDmg2").value);
-      //Elemental DMG %
-      var elementalDmg1 = Number(document.getElementById("elementalDmg1").value);
-      var elementalDmg2 = Number(document.getElementById("elementalDmg2").value);
-      //Elemental Defense Reduction %
-      var elementalDefReduction1 = Number(document.getElementById("elementalDefReduction1").value);
-      var elementalDefReduction2 = Number(document.getElementById("elementalDefReduction2").value);
-      //Elemental Mastery Bonus %
-      var elementalMasteryBonus1 = Number(document.getElementById("elementalMasteryBonus1").value);
-      var elementalMasteryBonus2 = Number(document.getElementById("elementalMasteryBonus2").value);
-      //Physical Defense Reduction %
-      var physicalDefReduction1 = Number(document.getElementById("physicalDefReduction1").value);
-      var physicalDefReduction2 = Number(document.getElementById("physicalDefReduction2").value);
+      const inputs = {
+            original: {
+                  baseAttack: getValue("baseAttack1"),
+                  attackPercent: getValue("attack1"),
+                  attackFlat: getValue("attackFlat1"),
+                  criticalRate: getValue("criticalRate1"), 
+                  criticalDmg: getValue("criticalDmg1"),
+                  physicalDmg: getValue("physicalDmg1"),
+                  elementalDmg: getValue("elementalDmg1"),
+                  elementalDefReduction: getValue("elementalDefReduction1"),
+                  elementalMasteryBonus: getValue("elementalMasteryBonus1"),
+                  physicalDefReduction: getValue("physicalDefReduction1")
+            },
+            comparison: {
+                  baseAttack: getValue("baseAttack2"),
+                  attackPercent: getValue("attack2"),
+                  attackFlat: getValue("attackFlat2"),
+                  criticalRate: getValue("criticalRate2"),
+                  criticalDmg: getValue("criticalDmg2"),
+                  physicalDmg: getValue("physicalDmg2"),
+                  elementalDmg: getValue("elementalDmg2"),
+                  elementalDefReduction: getValue("elementalDefReduction2"),
+                  elementalMasteryBonus: getValue("elementalMasteryBonus2"),
+                  physicalDefReduction: getValue("physicalDefReduction2")
+            }
+      }
 
-      var normalAttackTotalDmg1 = ((((baseAttack1 * (1 + attack1 / 100)) + attackFlat1) * (1 + (criticalRate1 / 100 * (1 + criticalDmg1 / 100))) * (1 + physicalDmg1 / 100)) / (1 - physicalDefReduction1 / 100));
-      document.getElementById("normalAttackTotalDmg1").innerHTML = normalAttackTotalDmg1.toFixed(2);
+      const outputs = {
+            original: {
+                  normalAttack: calculateNormalDamage(inputs.original),
+                  elementalAttack: calculateElementalAttackDamage(inputs.original),
+                  elementalCombo: calculateElementalComboTotalDamage(inputs.original)
+            },
+            comparison: {
+                  normalAttack: calculateNormalDamage(inputs.comparison),
+                  elementalAttack: calculateElementalAttackDamage(inputs.comparison),
+                  elementalCombo: calculateElementalComboTotalDamage(inputs.comparison)
+            }
+      }
 
-      var normalAttackTotalDmg2 = ((((baseAttack2 * (1 + attack2 / 100)) + attackFlat2) * (1 + (criticalRate2 / 100 * (1 + criticalDmg2 / 100))) * (1 + physicalDmg2 / 100)) / (1 - physicalDefReduction2 / 100));
-      document.getElementById("normalAttackTotalDmg2").innerHTML = normalAttackTotalDmg2.toFixed(2);
+      const difference = {
+            normalAttack: outputs.comparison.normalAttack / outputs.original.normalAttack * 100,
+            elementalAttack: outputs.comparison.elementalAttack / outputs.original.elementalAttack * 100,
+            elementalCombo: outputs.comparison.elementalCombo / outputs.original.elementalCombo * 100,
+      }
 
-      var normalAttackTotalDmg3 = normalAttackTotalDmg2 / normalAttackTotalDmg1 * 100;
-      document.getElementById("normalAttackTotalDmg3").innerHTML = normalAttackTotalDmg3.toFixed(2);
+      showOutput(outputs, difference)
+}
 
-      var elementalAttackTotalDmg1 = (((baseAttack1 * (1 + attack1 / 100)) + attackFlat1) * (1 + (criticalRate1 / 100 * (1 + criticalDmg1 / 100))) * (1 + elementalDmg1 / 100)) / (1 - elementalDefReduction1 / 100);
-      document.getElementById("elementalAttackTotalDmg1").innerHTML = elementalAttackTotalDmg1.toFixed(2);
+function showOutput(outputs, difference) {
+      // Original
+      showValue("normalAttackTotalDmg1", outputs.original.normalAttack)
+      showValue("elementalAttackTotalDmg1", outputs.original.elementalAttack)
+      showValue("elementalComboTotalDmg1", outputs.original.elementalCombo)
 
-      var elementalAttackTotalDmg2 = (((baseAttack2 * (1 + attack2 / 100)) + attackFlat2) * (1 + (criticalRate2 / 100 * (1 + criticalDmg2 / 100))) * (1 + elementalDmg2 / 100)) / (1 - elementalDefReduction2 / 100);
-      document.getElementById("elementalAttackTotalDmg2").innerHTML = elementalAttackTotalDmg2.toFixed(2);
+      // Comparison
+      showValue("normalAttackTotalDmg2", outputs.comparison.normalAttack)
+      showValue("elementalAttackTotalDmg2", outputs.comparison.elementalAttack)
+      showValue("elementalComboTotalDmg2", outputs.comparison.elementalCombo)
 
-      var elementalAttackTotalDmg3 = elementalAttackTotalDmg2 / elementalAttackTotalDmg1 * 100;
-      document.getElementById("elementalAttackTotalDmg3").innerHTML = elementalAttackTotalDmg3.toFixed(2);
+      // Difference
+      showValue("normalAttackTotalDmg3", difference.normalAttack)
+      showValue("elementalAttackTotalDmg3", difference.elementalAttack)
+      showValue("elementalComboTotalDmg3", difference.elementalCombo)
+}
 
-      var elementalComboTotalDmg1 = (((baseAttack1 * (1 + attack1 / 100)) + attackFlat1) * (1 + (criticalRate1 / 100 * (1 + criticalDmg1 / 100))) * (1 + elementalDmg1 / 100) * (1 + elementalMasteryBonus1 / 100)) / (1 - elementalDefReduction1 / 100);
-      document.getElementById("elementalComboTotalDmg1").innerHTML = elementalComboTotalDmg1.toFixed(2);
+function calculateRawPhysicalDamage(stats) {
+      const base = stats.baseAttack * (1 + stats.attackPercent / 100) + stats.attackFlat
+      const crit = 1 + (stats.criticalRate / 100 * (1 + stats.criticalDmg / 100))
+      return base * crit;
+}
 
-      var elementalComboTotalDmg2 = (((baseAttack2 * (1 + attack2 / 100)) + attackFlat2) * (1 + (criticalRate2 / 100 * (1 + criticalDmg2 / 100))) * (1 + elementalDmg2 / 100) * (1 + elementalMasteryBonus2 / 100)) / (1 - elementalDefReduction2 / 100);
-      document.getElementById("elementalComboTotalDmg2").innerHTML = elementalComboTotalDmg2.toFixed(2);
+function calculateRawElementalDamage(stats) {
+      const rawPhysicalDamage = calculateRawPhysicalDamage(stats)
+      const elementalDamage = (1 + stats.elementalDmg / 100)
 
-      var elementalComboTotalDmg3 = elementalComboTotalDmg2 / elementalComboTotalDmg1 * 100;
-      document.getElementById("elementalComboTotalDmg3").innerHTML = elementalComboTotalDmg3.toFixed(2);
+      return rawPhysicalDamage * elementalDamage
+}
+
+function calculateNormalDamage(stats) {
+      const rawPhysicalDamage = calculateRawPhysicalDamage(stats)
+      const physicalDamage = (1 + stats.physicalDmg / 100) / (1 - stats.physicalDefReduction / 100)
+     
+      return rawPhysicalDamage * physicalDamage
+}
+
+function calculateElementalAttackDamage(stats) {
+      const rawElementalDamage = calculateRawElementalDamage(stats)
+      const elementalReduction = 1 - stats.elementalDefReduction / 100
+      
+      return rawElementalDamage / elementalReduction
+}
+
+function calculateElementalComboTotalDamage(stats) {
+      const rawElementalDamage = calculateRawElementalDamage(stats)
+      const elementalReduction = 1 - stats.elementalDefReduction / 100
+      const elementalMastery = 1 + stats.elementalMasteryBonus / 100
+
+      return rawElementalDamage * elementalMastery / elementalReduction
 }
